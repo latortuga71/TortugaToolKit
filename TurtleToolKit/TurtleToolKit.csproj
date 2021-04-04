@@ -70,6 +70,7 @@
     <Compile Include="DisableDefenderForEndpoint.cs" />
     <Compile Include="DisableEtw.cs" />
     <Compile Include="EnablePrivileges.cs" />
+    <Compile Include="GetCurrentIdentity.cs" />
     <Compile Include="GetSystem.cs" />
     <Compile Include="GetTrustedInstaller.cs" />
     <Compile Include="InvokeClassicInjection.cs" />

@@ -1,9 +1,8 @@
 ﻿using System;
-using TurtleToolKitManaged;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using System.ComponentModel;
-
+using TurtleToolKitManaged;
 
 namespace TurtleToolKitServices
 {
