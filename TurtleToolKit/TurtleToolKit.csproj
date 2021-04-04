@@ -81,7 +81,7 @@
     <Compile Include="InvokeShellcodeEncryption.cs" />
     <Compile Include="InvokeTurtleDump.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RevokePrivs.cs" />
+    <Compile Include="UndoImpersonation.cs" />
     <Compile Include="TurtleToolKitServices\TurtleToolKitSevices.cs" />
     <Compile Include="TurtleToolKitCrypt\TurtleToolKitCrypt.cs" />
     <Compile Include="TurtleToolKitImpersonate\TurtleToolKitImpersonate.cs" />

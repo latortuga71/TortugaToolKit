@@ -3,9 +3,9 @@ using TurtleToolKitImpersonate;
 
 namespace TurtleToolKit
 {
-    [Cmdlet(VerbsSecurity.Revoke, "Privs")] // <- seeting cmdlet name and verbs
-    [Alias("RVPRVS")] //<- cmdlet alias
-    public class RevokePrivs: Cmdlet
+    [Cmdlet(VerbsCommon.Undo, "Impersonation")] // <- seeting cmdlet name and verbs
+    [Alias("UNIMP")] //<- cmdlet alias
+    public class UndoImpersonation: Cmdlet
     {
         protected override void BeginProcessing()
         {
