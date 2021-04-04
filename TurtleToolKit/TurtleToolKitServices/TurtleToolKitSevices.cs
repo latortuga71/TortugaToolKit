@@ -155,6 +155,12 @@ namespace TurtleToolKitServices
             return 1;
         }
 
+        public static bool CheckIfAdminAccess(string target)
+        {
+            if (Win32.OpenSCManager(target, null, Win32.SC_MANAGER_ALL_ACCESS) == IntPtr.Zero)
+                return false;
+            return true;
+        }
 
         public static bool QueryRemoteServiceBinaryPath(string target, string serviceName, ref string binaryPath)
         {

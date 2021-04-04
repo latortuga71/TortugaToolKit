@@ -73,6 +73,7 @@
     <Compile Include="GetCurrentIdentity.cs" />
     <Compile Include="GetSystem.cs" />
     <Compile Include="GetTrustedInstaller.cs" />
+    <Compile Include="InvokeAdminCheck.cs" />
     <Compile Include="InvokeClassicInjection.cs" />
     <Compile Include="InvokeFileLessLateralMovement.cs" />
     <Compile Include="InvokeLsaDump.cs" />

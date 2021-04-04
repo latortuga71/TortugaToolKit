@@ -34,6 +34,13 @@ namespace TurtleToolKit
             Console.WriteLine("The current user is : " + currentIdentity.Name);
             TokenImpersonationLevel token = currentIdentity.ImpersonationLevel;
             Console.WriteLine("The impersonation level for the current user is : " + token.ToString());
+            var groups = currentIdentity.Groups.Translate(typeof(NTAccount));
+            Console.WriteLine("The group memberships: ");
+            Console.WriteLine("####################");
+            foreach (var grp in groups)
+            {
+                Console.WriteLine(" ::: {0} :::",grp.Value);
+            }
             return true;
         }
 
