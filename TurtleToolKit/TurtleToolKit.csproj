@@ -85,6 +85,7 @@
     <Compile Include="InvokeClassicInjection.cs" />
     <Compile Include="InvokeFileLessLateralMovement.cs" />
     <Compile Include="InvokeLsaDump.cs" />
+    <Compile Include="InvokeMsSQLShell.cs" />
     <Compile Include="InvokeProcessHollow.cs" />
     <Compile Include="InvokeShellcodeEncryption.cs" />
     <Compile Include="InvokeTurtleDump.cs" />
