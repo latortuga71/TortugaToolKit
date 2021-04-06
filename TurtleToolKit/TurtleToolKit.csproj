@@ -53,6 +53,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Management" />
     <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.PowerShell.5.ReferenceAssemblies.1.1.0\lib\net4\System.Management.Automation.dll</HintPath>
@@ -70,6 +72,11 @@
     <Compile Include="DisableDefenderForEndpoint.cs" />
     <Compile Include="DisableEtw.cs" />
     <Compile Include="EnablePrivileges.cs" />
+    <Compile Include="GetActiveDirectoryComputers.cs" />
+    <Compile Include="GetActiveDirectoryForests.cs" />
+    <Compile Include="GetActiveDirectoryGroupMembership.cs" />
+    <Compile Include="GetActiveDirectoryGroups.cs" />
+    <Compile Include="GetActiveDirectoryUsers.cs" />
     <Compile Include="GetCurrentIdentity.cs" />
     <Compile Include="GetSystem.cs" />
     <Compile Include="GetTrustedInstaller.cs" />
@@ -81,6 +88,9 @@
     <Compile Include="InvokeShellcodeEncryption.cs" />
     <Compile Include="InvokeTurtleDump.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchSQLDb.cs" />
+    <Compile Include="TurtleToolKitAD\TurtleToolKitAD.cs" />
+    <Compile Include="TurtleToolKitSQL\TurtleToolKitSQL.cs" />
     <Compile Include="UndoImpersonation.cs" />
     <Compile Include="TurtleToolKitServices\TurtleToolKitSevices.cs" />
     <Compile Include="TurtleToolKitCrypt\TurtleToolKitCrypt.cs" />
