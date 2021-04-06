@@ -21,7 +21,7 @@ namespace TurtleToolKitSQL
         public List<string> LoginsCanBeImpersonated;
         SqlConnection sqlConn; // database connection used throughout class
         // Constructor
-        public SQL(string srv, string db,bool ADCreds=false,string user="",string password="")
+        public SQL(string srv, string db, bool ADCreds = false, string user = "", string password = "")
         {
             useADCreds = ADCreds;
             targetServer = srv;
@@ -86,11 +86,57 @@ namespace TurtleToolKitSQL
             SqlCommand command = new SqlCommand(query, sqlConn);
             SqlDataReader commandReader = command.ExecuteReader();
             commandReader.Read();
-            Console.WriteLine("::: Current DB {0} setting variable :::", commandReader[0]);
+            Console.WriteLine("::: Current DB {0} :::", commandReader[0]);
             startingDb = commandReader[0].ToString();
             commandReader.Close();
         }
-
-
+        public void GetCurrentDbUser()
+        {
+            //Send a command to get current user
+            string queryLogin = "SELECT SYSTEM_USER;";
+            SqlCommand command = new SqlCommand(queryLogin, sqlConn);
+            SqlDataReader commandReader = command.ExecuteReader();
+            commandReader.Read();
+            Console.WriteLine("::: Logged in as user {0} :::", commandReader[0]);
+            commandReader.Close();
+        }
+        public void GetCurrentDbUserContext()
+        {
+            //Send a command to get current user
+            string queryLogin = "SELECT USER_NAME();";
+            SqlCommand command = new SqlCommand(queryLogin, sqlConn);
+            SqlDataReader commandReader = command.ExecuteReader();
+            commandReader.Read();
+            Console.WriteLine("::: Executing in context of user {0} :::", commandReader[0]);
+            commandReader.Close();
+        }
+        public bool CheckRole(string roleToCheck)
+        {
+            // send command to get current user role membership
+            string queryRole = "SELECT IS_SRVROLEMEMBER('" + roleToCheck + "');";
+            SqlCommand command = new SqlCommand(queryRole, sqlConn);
+            SqlDataReader commandReader = command.ExecuteReader();
+            commandReader.Read();
+            Int32 role = Int32.Parse(commandReader[0].ToString());
+            if (role == 1)
+            {
+                Console.WriteLine("::: User is member of {0} role :::", roleToCheck);
+                commandReader.Close();
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("::: User is NOT member of {0} role :::", roleToCheck);
+                commandReader.Close();
+                return false;
+            }
+        }
+        public void CheckAllRoles()
+        {
+            foreach (string role in RolesToCheck)
+            {
+                CheckRole(role);
+            }
+        }
     }
 }
