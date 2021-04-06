@@ -1,25 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System;
+using System.Text;
+using System.Threading.Tasks;
 using System.Management.Automation;
 using TurtleToolKitSQL;
 
 namespace TurtleToolKit
 {
-    [Cmdlet(VerbsCommon.Search, "SQLDB")] // <- seeting cmdlet name and verbs
-    [Alias("SSQLDB")] //<- cmdlet alias
-    public class SearchSqlDbs : Cmdlet
+    [Cmdlet(VerbsCommon.Get, "MsSQLQuery")] // <- seeting cmdlet name and verbs
+    [Alias("GSQLQ")] //<- cmdlet alias
+    public class GetMsSQLQuery : Cmdlet
     {
         [Parameter(Mandatory = true)] [Alias("h")] public string targetServer { get; set; }
         [Parameter(Mandatory = true)] [Alias("d")] public string database { get; set; }
         [Parameter(Mandatory = true)] [Alias("ad")] public bool useAdCreds { get; set; }
         [Parameter(Mandatory = false)] [Alias("u")] public string user { get; set; }
         [Parameter(Mandatory = false)] [Alias("p")] public string password { get; set; }
+        [Parameter(Mandatory = true)] [Alias("q")] public string query { get; set; }
 
-        public static List<string> linkedServers;
         protected override void BeginProcessing()
         {
             base.BeginProcessing();
         }
+
         // Process each item in pipeline
         protected override void ProcessRecord()
         {
@@ -29,47 +34,33 @@ namespace TurtleToolKit
             if (useAdCreds)
             {
                 sql = new SQL(targetServer, database, useAdCreds);
-            } else
+            }
+            else
             {
                 sql = new SQL(targetServer, database, useAdCreds, user, password);
             }
-            ExecuteSearchDB(sql);
-            WriteWarning("Use information listed above to run subsequent cmdlets");
+            ExecuteSQLQuery(sql, query);
+            sql.CloseDb();
         }
+            //ExecuteSearchDB(sql);
+            //WriteWarning("Use information listed above to run subsequent cmdlets");
         // EndProcessing Used to clean up cmdlet
         protected override void EndProcessing() { base.EndProcessing(); }
         // Handle abnormal termination
         protected override void StopProcessing() { base.StopProcessing(); }
 
-        public static bool ExecuteSearchDB(SQL sqlObj)
+        public static bool ExecuteSQLQuery(SQL sqlObj,string q)
         {
+            // connect
             if (!sqlObj.ConnectToDb())
                 return false;
-            // start enumeration
-            sqlObj.GetCurrentDb();
-            sqlObj.GetLoggedInUser();
-            sqlObj.GetCurrentDbUser();
-            sqlObj.GetCurrentDbUserContext();
-            sqlObj.CheckAllRoles();
-            sqlObj.GetImpersonatableUsers();
-            Console.WriteLine("::: Attempting to check if can impersonate users ::: ");
-            foreach (string u in sqlObj.LoginsCanBeImpersonated)
+            // run query
+            if (!sqlObj.PerformQuery(q))
             {
-                sqlObj.ImpersonateDbLogin(u);
-                sqlObj.GetCurrentDbUser();
-                sqlObj.CheckAllRoles();
-                sqlObj.RevertUser();
+                return false;
             }
-            sqlObj.CheckXpShellEnabled();
-            sqlObj.GetLinkedServers();
-            sqlObj.LinkedServerEnumeration();
-            // End of func
-            sqlObj.CloseDb();
             return true;
-            
         }
-
-
 
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="GetActiveDirectoryGroups.cs" />
     <Compile Include="GetActiveDirectoryUsers.cs" />
     <Compile Include="GetCurrentIdentity.cs" />
+    <Compile Include="GetMsSQLQuery.cs" />
     <Compile Include="GetSystem.cs" />
     <Compile Include="GetTrustedInstaller.cs" />
     <Compile Include="InvokeAdminCheck.cs" />
