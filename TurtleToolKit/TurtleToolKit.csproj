@@ -89,7 +89,7 @@
     <Compile Include="InvokeMsSQLShell.cs" />
     <Compile Include="InvokeProcessHollow.cs" />
     <Compile Include="InvokeShellcodeEncryption.cs" />
-    <Compile Include="InvokeTokenManipulation.cs" />
+    <Compile Include="InvokeTokenStealer.cs" />
     <Compile Include="InvokeTurtleDump.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GetSQLInfo.cs" />

