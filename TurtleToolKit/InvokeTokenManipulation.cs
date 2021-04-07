@@ -205,7 +205,7 @@ namespace TurtleToolKit
             IntPtr DuplicatedToken = new IntPtr();
             if (!Win32.DuplicateToken(hToken, 2, ref DuplicatedToken)) return false;
             // impersonate logged on user with duplicated token
-            Win32.CloseHandle(hToken);
+
             Win32.STARTUPINFO si = new Win32.STARTUPINFO();
             Win32.PROCESS_INFORMATION pi = new Win32.PROCESS_INFORMATION();
             if (!Win32.DuplicateTokenEx(hToken, (uint)0x02000000L, IntPtr.Zero, 2, 1, out DuplicatedToken))
@@ -255,6 +255,7 @@ namespace TurtleToolKit
             Console.WriteLine("::: Successfully Execute ProcessHollow via -> {0} :::", exepath);
             Win32.CloseHandle(hProcess);
             Win32.CloseHandle(DuplicatedToken);
+            Win32.CloseHandle(hToken);
             return true;
         }
         public static bool EnumTokens()
