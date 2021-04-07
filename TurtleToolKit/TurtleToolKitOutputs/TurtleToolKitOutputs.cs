@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace TurtleToolKitOutputs
 {
     public class ProcessHollowOutput
@@ -12,5 +13,11 @@ namespace TurtleToolKitOutputs
        public byte[] encryptedShellcode { get; set; }
        public byte[] encryptionKey { get; set; }
        public byte[] initVectorKey { get; set; }
+    }
+
+     public class TokenObjects
+    {
+        public IntPtr processHandle;
+        public IntPtr tokenHandle;
     }
 }

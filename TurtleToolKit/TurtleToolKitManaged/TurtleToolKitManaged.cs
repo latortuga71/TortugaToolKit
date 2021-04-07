@@ -648,7 +648,73 @@ namespace TurtleToolKitManaged
         public static extern uint LsaFreeMemory(
           IntPtr buffer
         );
-        ///
+        /// token stuff below
+
+        public enum TOKEN_INFORMATION_CLASS
+        {
+            TokenUser = 1,
+            TokenGroups,
+            TokenPrivileges,
+            TokenOwner,
+            TokenPrimaryGroup,
+            TokenDefaultDacl,
+            TokenSource,
+            TokenType,
+            TokenImpersonationLevel,
+            TokenStatistics,
+            TokenRestrictedSids,
+            TokenSessionId,
+            TokenGroupsAndPrivileges,
+            TokenSessionReference,
+            TokenSandBoxInert,
+            TokenAuditPolicy,
+            TokenOrigin
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct TOKEN_STATISTICS
+        {
+            public LUID TokenId;
+            public LUID AuthenticationId;
+            public uint ExpirationTime;
+            public uint TokenType;
+            public uint ImpersonationLevel;
+            public uint DynamicCharged;
+            public uint DynamicAvailable;
+            public uint GroupCount;
+            public uint PrivilegeCount;
+            public LUID ModifiedId;
+        }
+        [DllImport("Secur32.dll", SetLastError = false)]
+
+        public static extern uint LsaGetLogonSessionData(IntPtr luid, out IntPtr ppLogonSessionData);
+        [StructLayout(LayoutKind.Sequential)]
+
+        public struct SECURITY_LOGON_SESSION_DATA
+
+        {
+
+            public UInt32 Size;
+            public LUID LoginID;
+            public LSA_UNICODE_STRING Username;
+            public LSA_UNICODE_STRING LoginDomain;
+            public LSA_UNICODE_STRING AuthenticationPackage;
+            public UInt32 LogonType;
+            public UInt32 Session;
+            public IntPtr PSiD;
+            public UInt64 LoginTime;
+            public LSA_UNICODE_STRING LogonServer;
+            public LSA_UNICODE_STRING DnsDomainName;
+            public LSA_UNICODE_STRING Upn;
+
+        }
+        [DllImport("advapi32.dll", SetLastError=true)]
+        public static extern bool GetTokenInformation(
+            IntPtr TokenHandle,
+            TOKEN_INFORMATION_CLASS TokenInformationClass,
+            IntPtr TokenInformation,
+            uint TokenInformationLength,
+            out uint ReturnLength);
     }
 
 }
