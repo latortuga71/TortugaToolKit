@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace TurtleToolKitCrypt
 {
-    class Cryptor
+    public class Cryptor
     {
         public byte[] Encryptionkey;
         public byte[] Iv;
