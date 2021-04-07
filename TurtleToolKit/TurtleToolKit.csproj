@@ -90,7 +90,7 @@
     <Compile Include="InvokeShellcodeEncryption.cs" />
     <Compile Include="InvokeTurtleDump.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchSQLDb.cs" />
+    <Compile Include="GetSQLInfo.cs" />
     <Compile Include="TurtleToolKitAD\TurtleToolKitAD.cs" />
     <Compile Include="TurtleToolKitSQL\TurtleToolKitSQL.cs" />
     <Compile Include="UndoImpersonation.cs" />

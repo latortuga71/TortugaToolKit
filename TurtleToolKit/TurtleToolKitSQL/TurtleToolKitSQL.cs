@@ -215,7 +215,7 @@ namespace TurtleToolKitSQL
                 return;
             } catch
             {
-                Console.WriteLine("Need to enable advanced options first to enable cmd shell");
+                Console.WriteLine("::: Need to enable advanced options first to enable cmd shell :::");
                 reader.Close();
                 return;
 
@@ -311,22 +311,23 @@ namespace TurtleToolKitSQL
             }
             // check if links have outbound RPC enabled to perform xp CMD over link
             //"EXEC ('sp_configure ''show advanced options''') AT $currentSrv"
+            // SELECT is_rpc_out_enabled FROM sys.servers WHERE name = 'APPSRV01'
             try
             {
                 foreach (string srv in LinkedSqlServers)
                 {
-                    q = String.Format("EXEC ('sp_configure ''show advanced options''') AT {0}", srv);
+                    q = String.Format("SELECT is_rpc_out_enabled FROM sys.servers WHERE name = '{0}'", srv);
                     command = new SqlCommand(q, sqlConn);
                     reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        if (reader.GetValue(3).ToString() == "0")
+                        if (reader[0].ToString() == "False")
                         {
                             Console.WriteLine("::: rpc out disabled on {0} :::", srv);
                         }
                         else
                         {
-                            Console.WriteLine("rpc out enabled on {0}", srv);
+                            Console.WriteLine("::: rpc out enabled on {0} :::", srv);
                         }
                     }
                     reader.Close();

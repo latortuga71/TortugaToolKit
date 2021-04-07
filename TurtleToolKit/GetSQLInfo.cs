@@ -5,9 +5,9 @@ using TurtleToolKitSQL;
 
 namespace TurtleToolKit
 {
-    [Cmdlet(VerbsCommon.Search, "SQLDB")] // <- seeting cmdlet name and verbs
-    [Alias("SSQLDB")] //<- cmdlet alias
-    public class SearchSqlDbs : Cmdlet
+    [Cmdlet(VerbsCommon.Get, "SQLInfo")] // <- seeting cmdlet name and verbs
+    [Alias("GSQLI")] //<- cmdlet alias
+    public class GetSQLInfo : Cmdlet
     {
         [Parameter(Mandatory = true)] [Alias("h")] public string targetServer { get; set; }
         [Parameter(Mandatory = true)] [Alias("d")] public string database { get; set; }
