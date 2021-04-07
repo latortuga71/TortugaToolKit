@@ -19,5 +19,10 @@ namespace TurtleToolKitOutputs
     {
         public IntPtr processHandle;
         public IntPtr tokenHandle;
+        public string userName;
+        public string userDomain;
+        public uint logonType;
+        public string procName;
+        public int pid;
     }
 }

