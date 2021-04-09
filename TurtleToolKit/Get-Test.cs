@@ -15,16 +15,13 @@ namespace TurtleToolKit
         protected override void BeginProcessing()
         {
             base.BeginProcessing();
-            //WriteInformation(new HostInformationMessage { Message = "Hellow from c#", ForegroundColor = ConsoleColor.Green, NoNewLine = false }, new[] { "PSHOST" });
-            testFunc();
-            testFunc2();
         }
 
         // Process each item in pipeline
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
-
+            testFunc2();
             return;
         }
         // EndProcessing Used to clean up cmdlet
@@ -34,12 +31,14 @@ namespace TurtleToolKit
 
         protected bool testFunc()
         {
-            WriteInformation(new HostInformationMessage { Message = "Hellow from c#", ForegroundColor = ConsoleColor.Green, NoNewLine = false }, new[] { "PSHOST" });
+            //WriteInformation(new HostInformationMessage { Message = "Hellow from c#", ForegroundColor = ConsoleColor.Green, NoNewLine = false }, new[] { "PSHOST" });
             return true;
         }
         public bool testFunc2()
         {
-            this.WriteInformation(new HostInformationMessage { Message = "Hellow from c# PT.2", ForegroundColor = ConsoleColor.Green, NoNewLine = false }, new[] { "PSHOST" });
+            //HostInformationMessage test = new HostInformationMessage { Message = "TEST" };
+            //this.WriteInformation(test,new[] { "PSHOST" });
+            this.WriteObject("test");
             return true;
         }
 
