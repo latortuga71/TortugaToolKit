@@ -68,36 +68,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DisableAMSI.cs" />
-    <Compile Include="DisableDefenderForEndpoint.cs" />
-    <Compile Include="DisableEtw.cs" />
-    <Compile Include="EnablePrivileges.cs" />
-    <Compile Include="Get-Test.cs" />
-    <Compile Include="GetActiveDirectoryComputers.cs" />
-    <Compile Include="GetActiveDirectoryForests.cs" />
-    <Compile Include="GetActiveDirectoryGroupMembership.cs" />
-    <Compile Include="GetActiveDirectoryGroups.cs" />
-    <Compile Include="GetActiveDirectoryUsers.cs" />
-    <Compile Include="GetCurrentIdentity.cs" />
-    <Compile Include="GetMsSQLQuery.cs" />
-    <Compile Include="GetSystem.cs" />
-    <Compile Include="GetTrustedInstaller.cs" />
-    <Compile Include="InvokeAdminCheck.cs" />
-    <Compile Include="InvokeAssemblyLoader.cs" />
-    <Compile Include="InvokeClassicInjection.cs" />
-    <Compile Include="InvokeFileLessLateralMovement.cs" />
-    <Compile Include="InvokeLsaDump.cs" />
-    <Compile Include="InvokeMsSQLAssembly.cs" />
-    <Compile Include="InvokeMsSQLShell.cs" />
-    <Compile Include="InvokeProcessHollow.cs" />
-    <Compile Include="InvokeShellcodeEncryption.cs" />
-    <Compile Include="InvokeTokenStealer.cs" />
-    <Compile Include="InvokeTurtleDump.cs" />
+    <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\InvokeTurtleHound.cs" />
+    <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\TurtleHound.cs" />
+    <Compile Include="TurtleToolKit\Evasion\DisableAMSI.cs" />
+    <Compile Include="TurtleToolKit\Evasion\DisableDefenderForEndpoint.cs" />
+    <Compile Include="TurtleToolKit\Evasion\DisableEtw.cs" />
+    <Compile Include="TurtleToolKit\Identity\EnablePrivileges.cs" />
+    <Compile Include="TurtleToolKit\Test\Get-Test.cs" />
+    <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\GetActiveDirectoryComputers.cs" />
+    <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\GetActiveDirectoryForests.cs" />
+    <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\GetActiveDirectoryGroupMembership.cs" />
+    <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\GetActiveDirectoryGroups.cs" />
+    <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\GetActiveDirectoryUsers.cs" />
+    <Compile Include="TurtleToolKit\Identity\GetCurrentIdentity.cs" />
+    <Compile Include="TurtleToolKit\MsSQL\GetMsSQLQuery.cs" />
+    <Compile Include="TurtleToolKit\Identity\GetSystem.cs" />
+    <Compile Include="TurtleToolKit\Identity\GetTrustedInstaller.cs" />
+    <Compile Include="TurtleToolKit\LateralMovement\InvokeAdminCheck.cs" />
+    <Compile Include="TurtleToolKit\Execution\InvokeAssemblyLoader.cs" />
+    <Compile Include="TurtleToolKit\Execution\InvokeClassicInjection.cs" />
+    <Compile Include="TurtleToolKit\LateralMovement\InvokeFileLessLateralMovement.cs" />
+    <Compile Include="TurtleToolKit\Credentials\InvokeLsaDump.cs" />
+    <Compile Include="TurtleToolKit\MsSQL\InvokeMsSQLAssembly.cs" />
+    <Compile Include="TurtleToolKit\MsSQL\InvokeMsSQLShell.cs" />
+    <Compile Include="TurtleToolKit\Execution\InvokeProcessHollow.cs" />
+    <Compile Include="TurtleToolKit\Execution\InvokeShellcodeEncryption.cs" />
+    <Compile Include="TurtleToolKit\Credentials\InvokeTokenStealer.cs" />
+    <Compile Include="TurtleToolKit\Credentials\InvokeTurtleDump.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GetSQLInfo.cs" />
+    <Compile Include="TurtleToolKit\MsSQL\GetSQLInfo.cs" />
     <Compile Include="TurtleToolKitAD\TurtleToolKitAD.cs" />
     <Compile Include="TurtleToolKitSQL\TurtleToolKitSQL.cs" />
-    <Compile Include="UndoImpersonation.cs" />
+    <Compile Include="TurtleToolKit\Identity\UndoImpersonation.cs" />
     <Compile Include="TurtleToolKitServices\TurtleToolKitSevices.cs" />
     <Compile Include="TurtleToolKitCrypt\TurtleToolKitCrypt.cs" />
     <Compile Include="TurtleToolKitImpersonate\TurtleToolKitImpersonate.cs" />
@@ -118,5 +120,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
