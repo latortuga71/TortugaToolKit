@@ -72,6 +72,7 @@
     <Compile Include="DisableDefenderForEndpoint.cs" />
     <Compile Include="DisableEtw.cs" />
     <Compile Include="EnablePrivileges.cs" />
+    <Compile Include="Get-Test.cs" />
     <Compile Include="GetActiveDirectoryComputers.cs" />
     <Compile Include="GetActiveDirectoryForests.cs" />
     <Compile Include="GetActiveDirectoryGroupMembership.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="GetSystem.cs" />
     <Compile Include="GetTrustedInstaller.cs" />
     <Compile Include="InvokeAdminCheck.cs" />
+    <Compile Include="InvokeAssemblyLoader.cs" />
     <Compile Include="InvokeClassicInjection.cs" />
     <Compile Include="InvokeFileLessLateralMovement.cs" />
     <Compile Include="InvokeLsaDump.cs" />
