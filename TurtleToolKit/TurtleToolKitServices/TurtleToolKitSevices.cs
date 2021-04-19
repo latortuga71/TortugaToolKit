@@ -76,6 +76,33 @@ namespace TurtleToolKitServices
             Console.WriteLine("windefend not found or stoppped");
             return 1;
         }
+
+        public static int StartWinDefend()
+        {
+            ServiceController[] scServices;
+            scServices = ServiceController.GetServices();
+            foreach (ServiceController service in scServices)
+            {
+                if (service.ServiceName == "WinDefend")
+                {
+                    if (service.Status != ServiceControllerStatus.Running)
+                    {
+                        Console.WriteLine("Attempting to set start type to auto winDefend");
+                        ChangeStartMode(service, ServiceStartMode.Automatic);
+                        Console.WriteLine("Attempting to start winDefend");
+                        service.Start();
+                        service.WaitForStatus(ServiceControllerStatus.StartPending);
+                        return 0;
+                    }
+                    Console.WriteLine("WinDefend already running nothing to do");
+                    return 0;
+                }
+            }
+            Console.WriteLine("windefend not found or stoppped");
+            return 1;
+        }
+
+
         public static int StartTrustedInstaller()
         {
             ServiceController[] scServices;
@@ -90,11 +117,12 @@ namespace TurtleToolKitServices
                     if (service.StartType == ServiceStartMode.Disabled)
                     {
                         Console.WriteLine("Trusted installer is disabled Attempting to set it to demand start");
-                        if (!EditLocalServiceStartType("trustedinstaller", 3))
-                        {
-                            Console.WriteLine("Failed to set it to demand start");
-                            return 1;
-                        }
+                        ChangeStartMode(service, ServiceStartMode.Manual);
+                        //if (!EditLocalServiceStartType("trustedinstaller", 3))
+                        //{
+                        //    Console.WriteLine("Failed to set it to demand start");
+                        //    return 1;
+                        //}
                         Console.WriteLine("Successfully set trusted installer to demand start");
                     }
                     Console.WriteLine("Attempting to start trusted installer");

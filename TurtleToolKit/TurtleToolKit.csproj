@@ -75,6 +75,7 @@
     <Compile Include="TurtleToolKit\Evasion\DisableAMSI.cs" />
     <Compile Include="TurtleToolKit\Evasion\DisableDefenderForEndpoint.cs" />
     <Compile Include="TurtleToolKit\Evasion\DisableEtw.cs" />
+    <Compile Include="TurtleToolKit\Evasion\EnableDefenderForEndpoint.cs" />
     <Compile Include="TurtleToolKit\Identity\EnablePrivileges.cs" />
     <Compile Include="TurtleToolKit\PrivEsc\InvokeTurtleUp.cs" />
     <Compile Include="TurtleToolKit\PrivEsc\TurtleUp.cs" />
