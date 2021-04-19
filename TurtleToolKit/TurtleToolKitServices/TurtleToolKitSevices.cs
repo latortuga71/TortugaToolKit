@@ -84,6 +84,19 @@ namespace TurtleToolKitServices
             {
                 if (service.ServiceName == "TrustedInstaller")
                 {
+                    //Check if trusted installer is disabled!
+                    // if disabled set start type to demand
+                    Console.WriteLine("Checking if trusted installer is enabled");
+                    if (service.StartType == ServiceStartMode.Disabled)
+                    {
+                        Console.WriteLine("Trusted installer is disabled Attempting to set it to demand start");
+                        if (!EditLocalServiceStartType("trustedinstaller", 3))
+                        {
+                            Console.WriteLine("Failed to set it to demand start");
+                            return 1;
+                        }
+                        Console.WriteLine("Successfully set trusted installer to demand start");
+                    }
                     Console.WriteLine("Attempting to start trusted installer");
                     if (service.Status != ServiceControllerStatus.Running)
                     {
@@ -193,6 +206,37 @@ namespace TurtleToolKitServices
             string path = Marshal.PtrToStringAuto(configStruct.binaryPathName);
             Marshal.FreeHGlobal(ptr);
             binaryPath = path;
+            Win32.CloseServiceHandle(serviceHandle);
+            Win32.CloseServiceHandle(scManagerHandle);
+            return true;
+        }
+        public static bool EditLocalServiceStartType(string serviceName, uint startType)
+        {
+            var scManagerHandle = Win32.OpenSCManager(null, null, Win32.SC_MANAGER_ALL_ACCESS);
+            if (scManagerHandle == IntPtr.Zero)
+            {
+                Console.WriteLine("Open Service Manager Error");
+                return false;
+            }
+
+            var serviceHandle = Win32.OpenService(scManagerHandle, serviceName, Win32.SERVICE_ALL_ACCESS);
+
+            if (serviceHandle == IntPtr.Zero)
+            {
+                Console.WriteLine("Open Service Error");
+                int nError = Marshal.GetLastWin32Error();
+                var win32Exception = new Win32Exception(nError);
+                Console.WriteLine("Could not change service start type: " + win32Exception.Message);
+                return false;
+            }
+            var result = Win32.ChangeServiceConfig(serviceHandle, Win32.SERVICE_NO_CHANGE, startType, Win32.SERVICE_NO_CHANGE,null, null, IntPtr.Zero, null, null, null, null);
+            if (result == false)
+            {
+                int nError = Marshal.GetLastWin32Error();
+                var win32Exception = new Win32Exception(nError);
+                Console.WriteLine("Could not change service start type: " + win32Exception.Message);
+                return false;
+            }
             Win32.CloseServiceHandle(serviceHandle);
             Win32.CloseServiceHandle(scManagerHandle);
             return true;
