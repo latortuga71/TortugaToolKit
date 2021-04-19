@@ -76,6 +76,8 @@
     <Compile Include="TurtleToolKit\Evasion\DisableDefenderForEndpoint.cs" />
     <Compile Include="TurtleToolKit\Evasion\DisableEtw.cs" />
     <Compile Include="TurtleToolKit\Identity\EnablePrivileges.cs" />
+    <Compile Include="TurtleToolKit\PrivEsc\InvokeTurtleUp.cs" />
+    <Compile Include="TurtleToolKit\PrivEsc\TurtleUp.cs" />
     <Compile Include="TurtleToolKit\Test\Get-Test.cs" />
     <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\GetActiveDirectoryComputers.cs" />
     <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\GetActiveDirectoryForests.cs" />
