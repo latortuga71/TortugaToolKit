@@ -1,6 +1,6 @@
 # TortugaToolKit
 
-Written during OSEP course, for learning purposes. Used heavily during the exam with much success.
+Written during OSEP course, for learning purposes. Used heavily during the exam with much success. Thanks to all the open source projects out there that i was able to use and learn from.
 
 ## Examples
 
@@ -90,10 +90,27 @@ Undo-Impersonation
 ```
 
 ## credits
+Wouldnt be possible without these resources
 * https://github.com/GhostPack/SharpUp
 * https://github.com/tevora-threat/SharpView
 * https://github.com/BloodHoundAD/SharpHound3
 * https://devblogs.microsoft.com/scripting/use-powershell-to-decrypt-lsa-secrets-from-the-registry/
+* https://github.com/clymb3r/PowerShell/blob/master/Invoke-TokenManipulation/Invoke-TokenManipulation.ps1
+* https://www.exploit-db.com/exploits/13054
+* https://github.com/latortuga71/latortugaDump
+* https://github.com/b4rtik/ATPMiniDump
+* https://www.matteomalvica.com/blog/2019/12/02/win-defender-atp-cred-bypass/
+* https://github.com/cobbr/SharpSploit
+* https://medium.com/csis-techblog/silencing-microsoft-defender-for-endpoint-using-firewall-rules-3839a8bf8d18
+* https://0x00-0x00.github.io/research/2018/10/21/Windows-API-And-Impersonation-Part-2.html
+* https://github.com/latortuga71/DisableDefenderForEndpointPOC
+* https://institute.sektor7.net/
+* https://www.mike-gualtieri.com/posts/red-team-tradecraft-loading-encrypted-c-sharp-assemblies-in-memory
+* https://dotnetninja.net/2020/03/creating-a-powershell-cmdlet-in-c/
+* https://king-sabri.net/how-to-compile-embed-and-use-sharpsploit/
+* https://www.tiraniddo.dev/2017/08/the-art-of-becoming-trustedinstaller.html
+* https://www.codeproject.com/articles/18102/howto-almost-everything-in-active-directory-via-c
+* https://www.offensive-security.com/pen300-osep/
 
 
 ## Unlicense
