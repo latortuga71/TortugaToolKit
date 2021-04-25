@@ -89,8 +89,8 @@ Undo-Impersonation
 
 ```
 
-## credits
-Wouldnt be possible without these resources
+## Credits
+
 * https://github.com/GhostPack/SharpUp
 * https://github.com/tevora-threat/SharpView
 * https://github.com/BloodHoundAD/SharpHound3
