@@ -15,9 +15,40 @@ Invoke-ProcessHollow -procName 'svchost.exe' -k $r.encryptedKey -encsh $r.encryp
 
 ## List of cmdlets
 
+```
+Disable-AMSI
+Disable-DefenderForEndpoint
+Disable-Etw
+Enable-DefenderForEndpoint
+Enable-Privileges
+Get-ActiveDirectoryComputers
+Get-ActiveDirectoryForests
+Get-ActiveDirectoryGroupMembership
+Get-ActiveDirectoryGroups
+Get-ActiveDirectoryUsers
+Get-CurrentIdentity
+Get-MsSQLQuery
+Get-SQLInfo
+Get-System
+Get-TrustedInstaller
+Invoke-AdminCheck
+Invoke-AssemblyLoader
+Invoke-ClassicInjection
+Invoke-FileLessLateralMovement
+Invoke-LsaSecretsDmp
+Invoke-MsSQLAssembly
+Invoke-MsSQLShell
+Invoke-PingSweep
+Invoke-ProcessHollow
+Invoke-ShellcodeEncryption
+Invoke-TokenStealer
+Invoke-TurtleDump
+Invoke-TurtleHound
+Invoke-TurtleUp
+Invoke-TurtleView
+Undo-Impersonation
 
-todo
-
+```
 
 ## examples of each cmdlet
 
