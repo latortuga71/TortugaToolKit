@@ -111,7 +111,7 @@ Undo-Impersonation
 * https://www.tiraniddo.dev/2017/08/the-art-of-becoming-trustedinstaller.html
 * https://www.codeproject.com/articles/18102/howto-almost-everything-in-active-directory-via-c
 * https://www.offensive-security.com/pen300-osep/
-
+* https://github.com/Mr-Un1k0d3r/SCShell
 
 ## Unlicense
 
