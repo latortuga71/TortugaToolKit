@@ -90,9 +90,10 @@ Undo-Impersonation
 ```
 
 ## credits
-
-
-todo
+* https://github.com/GhostPack/SharpUp
+* https://github.com/tevora-threat/SharpView
+* https://github.com/BloodHoundAD/SharpHound3
+* https://devblogs.microsoft.com/scripting/use-powershell-to-decrypt-lsa-secrets-from-the-registry/
 
 
 ## Unlicense
