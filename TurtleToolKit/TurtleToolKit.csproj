@@ -72,6 +72,7 @@
     <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\InvokeTurtleView.cs" />
     <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\TurtleHound.cs" />
     <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\TurtleView.cs" />
+    <Compile Include="TurtleToolKit\Credentials\ShowAvailableTokens.cs" />
     <Compile Include="TurtleToolKit\Evasion\DisableAMSI.cs" />
     <Compile Include="TurtleToolKit\Evasion\DisableDefenderForEndpoint.cs" />
     <Compile Include="TurtleToolKit\Evasion\DisableEtw.cs" />

@@ -157,6 +157,8 @@ namespace TurtleToolKit
             int targetPid = Convert.ToInt32(Console.ReadLine());
             if (!ui)
             {
+                // If process to steal token is running in session 0
+                // need SeAssignPrimaryTokenPriv And CreateProcessAsUserW ?
                 if (!Impersonator.ImpersonateLoggedOnUserViaToken(targetPid))
                 {
                     Console.WriteLine("err failed impersonate logged on user VIA TOKEN {0}", Marshal.GetLastWin32Error());
