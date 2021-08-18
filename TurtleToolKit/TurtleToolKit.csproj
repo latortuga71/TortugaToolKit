@@ -72,6 +72,8 @@
     <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\InvokeTurtleView.cs" />
     <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\TurtleHound.cs" />
     <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\TurtleView.cs" />
+    <Compile Include="TurtleToolKit\Credentials\InvokeImpersonateToken.cs" />
+    <Compile Include="TurtleToolKit\Credentials\InvokeImpersonateProcessHollow.cs" />
     <Compile Include="TurtleToolKit\Credentials\ShowAvailableTokens.cs" />
     <Compile Include="TurtleToolKit\Evasion\DisableAMSI.cs" />
     <Compile Include="TurtleToolKit\Evasion\DisableDefenderForEndpoint.cs" />
@@ -101,7 +103,7 @@
     <Compile Include="TurtleToolKit\MsSQL\InvokeMsSQLShell.cs" />
     <Compile Include="TurtleToolKit\Execution\InvokeProcessHollow.cs" />
     <Compile Include="TurtleToolKit\Execution\InvokeShellcodeEncryption.cs" />
-    <Compile Include="TurtleToolKit\Credentials\InvokeTokenStealer.cs" />
+    <Compile Include="TurtleToolKit\Credentials\InvokeTokenStealerOLD.cs" />
     <Compile Include="TurtleToolKit\Credentials\InvokeTurtleDump.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TurtleToolKit\MsSQL\GetSQLInfo.cs" />

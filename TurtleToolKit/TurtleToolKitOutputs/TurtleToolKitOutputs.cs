@@ -15,6 +15,10 @@ namespace TurtleToolKitOutputs
        public byte[] initVectorKey { get; set; }
     }
 
+    public class SuccessObject
+    {
+        public bool Success { get; set; }
+    }
      public class TokenObjects
     {
         public IntPtr processHandle;

