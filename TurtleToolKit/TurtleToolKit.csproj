@@ -82,6 +82,7 @@
     <Compile Include="TurtleToolKit\Evasion\EnableDefenderForEndpoint.cs" />
     <Compile Include="TurtleToolKit\Evasion\UnhookDll.cs" />
     <Compile Include="TurtleToolKit\Execution\InvokeInjectionTest.cs" />
+    <Compile Include="TurtleToolKit\Execution\InvokeSelfInjection.cs" />
     <Compile Include="TurtleToolKit\Identity\EnablePrivileges.cs" />
     <Compile Include="TurtleToolKit\LateralMovement\InvokePingSweep.cs" />
     <Compile Include="TurtleToolKit\PrivEsc\InvokeTurtleUp.cs" />

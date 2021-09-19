@@ -80,6 +80,7 @@ namespace TurtleToolKitManaged
        [In] ref STARTUPINFO lpStartupInfo,
        out PROCESS_INFORMATION lpProcessInformation);
 
+
         //zw query information
         [DllImport("ntdll.dll", SetLastError = true)]
         public static extern UInt32 ZwQueryInformationProcess(
@@ -819,6 +820,43 @@ namespace TurtleToolKitManaged
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool UnmapViewOfFile(IntPtr lpBaseAddress);
+
+
+        public delegate bool EnumThreadDelegate(IntPtr hwnd, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool EnumThreadWindows(uint dwThreadId, EnumThreadDelegate lpfn, IntPtr lParam);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool InitializeProcThreadAttributeList(
+         IntPtr lpAttributeList,
+         int dwAttributeCount,
+         int dwFlags,
+         ref IntPtr lpSize);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool UpdateProcThreadAttribute(
+         IntPtr lpAttributeList,
+         uint dwFlags,
+         IntPtr Attribute,
+         IntPtr lpValue,
+         IntPtr cbSize,
+         IntPtr lpPreviousValue,
+         IntPtr lpReturnSize);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool DeleteProcThreadAttributeList(IntPtr lpAttributeList);
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+        public struct STARTUPINFOEX
+        {
+            public STARTUPINFO StartupInfo;
+            public IntPtr lpAttributeList;
+        }
+
     }
 
 }
