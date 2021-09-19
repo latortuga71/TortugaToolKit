@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PeHeaderParser\PeHeaderReader.cs" />
     <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\InvokeTurtleHound.cs" />
     <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\InvokeTurtleView.cs" />
     <Compile Include="TurtleToolKit\ActiveDirectoryEnumeration\TurtleHound.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="TurtleToolKit\Evasion\DisableDefenderForEndpoint.cs" />
     <Compile Include="TurtleToolKit\Evasion\DisableEtw.cs" />
     <Compile Include="TurtleToolKit\Evasion\EnableDefenderForEndpoint.cs" />
+    <Compile Include="TurtleToolKit\Evasion\UnhookDll.cs" />
     <Compile Include="TurtleToolKit\Execution\InvokeInjectionTest.cs" />
     <Compile Include="TurtleToolKit\Identity\EnablePrivileges.cs" />
     <Compile Include="TurtleToolKit\LateralMovement\InvokePingSweep.cs" />

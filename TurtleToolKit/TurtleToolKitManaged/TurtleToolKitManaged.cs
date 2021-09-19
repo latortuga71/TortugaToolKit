@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using HANDLE = System.IntPtr;
@@ -764,6 +765,60 @@ namespace TurtleToolKitManaged
             out IntPtr phNewToken);
         [DllImport("advapi32", SetLastError = true, CharSet = CharSet.Unicode)]
         public static extern bool CreateProcessWithTokenW(IntPtr hToken, LogonFlags dwLogonFlags, string lpApplicationName, string lpCommandLine, CreationFlags dwCreationFlags, IntPtr lpEnvironment, string lpCurrentDirectory, [In] ref STARTUPINFO lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
+
+
+        /// file mapping stuff
+         [DllImport("kernel32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern IntPtr CreateFileA(
+         [MarshalAs(UnmanagedType.LPStr)] string filename,
+         [MarshalAs(UnmanagedType.U4)] FileAccess access,
+         [MarshalAs(UnmanagedType.U4)] FileShare share,
+         IntPtr securityAttributes,
+         [MarshalAs(UnmanagedType.U4)] FileMode creationDisposition,
+         [MarshalAs(UnmanagedType.U4)] FileAttributes flagsAndAttributes,
+         IntPtr templateFile);
+
+        [Flags]
+        public enum FileMapProtection : uint
+        {
+            PageReadonly = 0x02,
+            PageReadWrite = 0x04,
+            PageWriteCopy = 0x08,
+            PageExecuteRead = 0x20,
+            PageExecuteReadWrite = 0x40,
+            SectionCommit = 0x8000000,
+            SectionImage = 0x1000000,
+            SectionNoCache = 0x10000000,
+            SectionReserve = 0x4000000,
+        }
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr CreateFileMapping(
+            IntPtr hFile,
+            IntPtr lpFileMappingAttributes,
+            FileMapProtection flProtect,
+            uint dwMaximumSizeHigh,
+            uint dwMaximumSizeLow,
+            [MarshalAs(UnmanagedType.LPStr)] string lpName);
+        public enum FileMapAccessType : uint
+        {
+            Copy = 0x01,
+            Write = 0x02,
+            Read = 0x04,
+            AllAccess = 0x08,
+            Execute = 0x20,
+        }
+
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr MapViewOfFileEx(IntPtr hFileMappingObject,
+           FileMapAccessType dwDesiredAccess, uint dwFileOffsetHigh, uint dwFileOffsetLow,
+           UIntPtr dwNumberOfBytesToMap, IntPtr lpBaseAddress);
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+        public static extern IntPtr GetModuleHandle(string lpModuleName);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern bool UnmapViewOfFile(IntPtr lpBaseAddress);
     }
 
 }
