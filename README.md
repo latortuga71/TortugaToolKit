@@ -71,6 +71,7 @@ Get-MsSQLQuery
 Get-SQLInfo
 Get-System
 Get-TrustedInstaller
+Invoke-UnhookDll
 Invoke-AdminCheck
 Invoke-AssemblyLoader
 Invoke-ClassicInjection
@@ -93,7 +94,7 @@ Undo-Impersonation
 ```
 
 ## Credits
-
+* https://gist.githubusercontent.com/augustoproiete/b51f29f74f5f5b2c59c39e47a8afc3a3/raw/412b018a593d977ba4d6059ac40e7cf28875becc/ReadingPortableExecutable_PE_header.cs
 * https://github.com/GhostPack/SharpUp
 * https://github.com/tevora-threat/SharpView
 * https://github.com/BloodHoundAD/SharpHound3
