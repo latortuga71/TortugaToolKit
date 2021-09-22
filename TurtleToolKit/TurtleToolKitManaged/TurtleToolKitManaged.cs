@@ -124,6 +124,9 @@ namespace TurtleToolKitManaged
         [DllImport("kernel32.dll",SetLastError = true)]
         public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint flNewProtect, out uint lpfOldProtect);
 
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern bool VirtualProtectEx(IntPtr hProcess, IntPtr lpAddress, UIntPtr dwSize, uint flNewProtect, out uint lpfOldProtect);
+
 
         //VirtualAlloc
         [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
