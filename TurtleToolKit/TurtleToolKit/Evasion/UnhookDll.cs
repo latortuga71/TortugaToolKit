@@ -161,6 +161,10 @@ namespace TurtleToolKit
             {
                 // call unhook remote
                 IntPtr hrProcess = Win32.OpenProcess(0x001F0FFF, false, pid);
+                if (hrProcess == IntPtr.Zero)
+                {
+                    return false;
+                }
                 if (!unHookRemote(hrProcess,addressOfHookedNtdll, ptrMapping, pathToDll)){
                     return false;
                 }
