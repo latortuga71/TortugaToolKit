@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -79,12 +80,16 @@
     <Compile Include="TurtleToolKit\Evasion\DisableAMSI.cs" />
     <Compile Include="TurtleToolKit\Evasion\DisableDefenderForEndpoint.cs" />
     <Compile Include="TurtleToolKit\Evasion\DisableEtw.cs" />
+    <Compile Include="TurtleToolKit\Evasion\DisableSysmon.cs" />
     <Compile Include="TurtleToolKit\Evasion\EnableDefenderForEndpoint.cs" />
     <Compile Include="TurtleToolKit\Evasion\UnhookDll.cs" />
     <Compile Include="TurtleToolKit\Execution\InvokeInjectionTest.cs" />
     <Compile Include="TurtleToolKit\Execution\InvokeSelfInjection.cs" />
     <Compile Include="TurtleToolKit\Identity\EnablePrivileges.cs" />
+    <Compile Include="TurtleToolKit\Identity\InvokeRunAs.cs" />
+    <Compile Include="TurtleToolKit\LateralMovement\InvokeDCOMShell.cs" />
     <Compile Include="TurtleToolKit\LateralMovement\InvokePingSweep.cs" />
+    <Compile Include="TurtleToolKit\LateralMovement\InvokeWmiShell.cs" />
     <Compile Include="TurtleToolKit\PrivEsc\InvokeTurtleUp.cs" />
     <Compile Include="TurtleToolKit\PrivEsc\TurtleUp.cs" />
     <Compile Include="TurtleToolKit\Test\Get-Test.cs" />
@@ -133,6 +138,8 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="TurtleToolKit\Persistence\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
