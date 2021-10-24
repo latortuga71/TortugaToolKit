@@ -7,6 +7,26 @@ namespace TurtleToolKitImpersonate
 {
     class Impersonator
     {
+        public static bool ImpersonateUserViaLogonCreds(string user, string pass, string domain)
+        {
+            IntPtr hToken = IntPtr.Zero;
+            if (!Win32.LogonUser(user, domain, pass, (int)Win32.LogonType.LOGON32_LOGON_INTERACTIVE, (int)Win32.LogonProvider.LOGON32_PROVIDER_DEFAULT, ref hToken)) {
+                Console.WriteLine("Failed to logon as user");
+                return false;
+            }
+            IntPtr DuplicatedToken = new IntPtr();
+            if (!Win32.DuplicateToken(hToken, 2, ref DuplicatedToken)) {
+                Console.WriteLine("Failed to duplicated token");
+                return false; 
+            }
+            if (!Win32.SetThreadToken(IntPtr.Zero, DuplicatedToken))
+            {
+                Console.WriteLine("Failed to set thread token");
+                return false;
+            }
+            return true;
+        }
+  
         public static bool IsPrivilegeEnabled(string Privilege)
         {
             bool ret;

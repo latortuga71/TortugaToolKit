@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -85,6 +86,7 @@
     <Compile Include="TurtleToolKit\Execution\InvokeInjectionTest.cs" />
     <Compile Include="TurtleToolKit\Execution\InvokeSelfInjection.cs" />
     <Compile Include="TurtleToolKit\Identity\EnablePrivileges.cs" />
+    <Compile Include="TurtleToolKit\Identity\InvokeRunAs.cs" />
     <Compile Include="TurtleToolKit\LateralMovement\InvokeDCOMShell.cs" />
     <Compile Include="TurtleToolKit\LateralMovement\InvokePingSweep.cs" />
     <Compile Include="TurtleToolKit\LateralMovement\InvokeWmiShell.cs" />
