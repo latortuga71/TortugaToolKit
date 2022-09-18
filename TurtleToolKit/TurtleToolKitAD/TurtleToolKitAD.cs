@@ -1,7 +1,7 @@
 ﻿using System;
 using System.DirectoryServices.AccountManagement;
 using System.DirectoryServices.ActiveDirectory;
-
+using System.Net;
 
 namespace TurtleToolKitAD
 {
@@ -27,7 +27,15 @@ namespace TurtleToolKitAD
             PrincipalSearchResult<Principal> results = searcher.FindAll();
             foreach (Principal c in results)
             {
-                Console.WriteLine("::: {0} :::", c.Name);
+
+                var e = Dns.GetHostEntry(c.Name);
+                var ip = "";
+                for (int x = 0; x < e.AddressList.Length; x++)
+                {
+                    ip += e.AddressList[x];
+                    ip += " ";
+                }
+                Console.WriteLine("::: {0} {1} :::", c.Name,ip);
             }
 
         }
